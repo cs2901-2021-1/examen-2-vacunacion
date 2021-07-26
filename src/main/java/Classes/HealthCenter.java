@@ -1,4 +1,5 @@
 package Classes;
+import java.util.*;
 
 public class HealthCenter {
 
@@ -7,6 +8,7 @@ public class HealthCenter {
     Integer partially_vaccinated;
     Integer completely_vaccinated;
     Integer total_people;
+    List<User> subscribed_users = new ArrayList<User>();
 
     public HealthCenter() {
         this.name = "Generic Health Center name";
@@ -34,5 +36,16 @@ public class HealthCenter {
     }
     public Integer getCompletely_vaccinated() {
         return this.completely_vaccinated;
+    }
+
+    public String get_name() {
+        return this.name;
+    }
+    public void register_user(User user) {
+        this.subscribed_users.add(user);
+    }
+
+    public void unsubscribe_user(User user) {
+        this.subscribed_users.remove(user);
     }
 }

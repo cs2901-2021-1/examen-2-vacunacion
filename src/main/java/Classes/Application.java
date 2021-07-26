@@ -29,8 +29,14 @@ public class Application {
         this.users.add("jbellido");
         this.users.add("tchambilla");
     }
+
+    private void populate_centers() {
+        this.centers.add(new HealthCenter("Centro 1", "Lima", 100, 200, 500));
+        this.centers.add(new HealthCenter("Centro 2", "Trujillo", 200, 300, 700));
+    }
     public Application() {
         this.populate_users();
+        this.populate_centers();
     }
 
     public Integer login_user(User user) {
@@ -52,6 +58,10 @@ public class Application {
     }
 
     public void get_general_information(User user) {
+        if (user.get_token() != online_users.get(user.get_token())) {
+            logger.info("Not authorized operation");
+            return;
+        }
         Integer total_partial = 0;
         Integer total_complete = 0;
 
@@ -62,4 +72,28 @@ public class Application {
         logger.info("Partially vaccinated: " + total_partial);
         logger.info("Total vaccinated completely: " + total_complete);
     }
+
+    public void register_user(User user, String center_name) {
+        if (user.get_token() != online_users.get(user.get_token())) {
+            logger.info("Not authorized operation");
+            return;
+        }
+        for (HealthCenter center : centers) {
+            if (center.get_name() == center_name) {
+                center.register_user(user);
+            }
+        }
+    }
+    public void unsubscribe_user(User user, String center_name) {
+        if (user.get_token() != online_users.get(user.get_token())) {
+            logger.info("Not authorized operation");
+            return;
+        }
+        for (HealthCenter center : centers) {
+            if (center.get_name() == center_name) {
+                center.unsubscribe_user(user);
+            }
+        }
+    }
+}
 }

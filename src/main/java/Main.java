@@ -15,6 +15,12 @@ public class Main {
         //FR02
         app.get_general_information(user_1);
 
+        //FR03
+        app.register_user(user_1, "Centro 1");
+        app.register_user(user_1, "Centro 2");
+
+        //FR04
+        app.unsubscribe_user(user_1, "Centro 2");
 
         //FR06
         app.logout_user(user_1);
